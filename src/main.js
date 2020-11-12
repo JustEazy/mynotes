@@ -8,6 +8,8 @@ import "firebase/auth";
 import "firebase/firestore";
 import firebase from "firebase/app";
 
+
+
 Vue.config.productionTip = false
 
 const firebaseConfig = {

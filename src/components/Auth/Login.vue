@@ -22,14 +22,15 @@
         to="register"
         style="color: black; text-decoration-color: black; text-align: center"
         >Я не зарегистрирован. Перейти на страницу регистрации</router-link
-      >{{error}}
+      >
+
     </v-form>
     
   </div>
 </template>
 <script>
 import firebase from "firebase";
-
+import {mapGetters} from "vuex"
 export default {
   data() {
     return {
@@ -39,13 +40,18 @@ export default {
       error:''
     };
   },
+  computed: {
+    ...mapGetters({
+
+    }),
+  },
   methods: {
     submit() {
       firebase
         .auth()
         .signInWithEmailAndPassword(this.email, this.password)
         .then((data) => {
-          this.$router.push({ name: "Home" });
+          this.$router.replace({ name: "Home" });
         })
         .catch((err) => {
           this.error = err.message;

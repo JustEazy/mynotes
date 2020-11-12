@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from '../components/Auth/Login.vue'
 import Register from '../components/Auth/Register.vue'
+import Auth from '../views/Auth.vue'
 import store from '../store'
 Vue.use(VueRouter)
 
@@ -12,14 +13,14 @@ const routes = [
     name: 'Home',
     component: Home,
     beforeEnter: (to, from, next) => {
-      if (!store.state.user.loggedIn) next({ name: 'Login' })
-        else next()
+      if (store.state.user.loggedIn) next()
+      else next({name: Login})
     }
   },
   {
     path: '/auth',
     name: 'Auth',
-    component: () => import('../views/Auth.vue'),
+    component: Auth,
     children:[
       {
       path: 'login',

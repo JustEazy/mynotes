@@ -5,7 +5,12 @@
 </template>
 
 <script>
-export default {};
+import * as database from './store/db'
+export default {
+  mounted(){
+    database.getAllNotes()
+  }
+};
 </script>
 
 <style>

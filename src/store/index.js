@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -8,7 +7,8 @@ export default new Vuex.Store({
     user: {
       loggedIn: false,
       data: null
-    }
+    },
+    notes: null,
   },
   mutations: {
     SET_LOGGED_IN(state, value) {
@@ -16,6 +16,9 @@ export default new Vuex.Store({
     },
     SET_USER(state, data) {
       state.user.data = data;
+    },
+    SET_ALL_NOTES(state, data){
+      state.notes = data
     }
   },
   actions: {
@@ -29,11 +32,17 @@ export default new Vuex.Store({
       } else {
         commit("SET_USER", null);
       }
+    },
+   async getAllNotes({ commit }, data){
+       commit('SET_ALL_NOTES', await data)
     }
   },
   getters: {
     user(state) {
       return state.user
+    },
+    notes(state){
+      return state.notes
     }
   },
 })

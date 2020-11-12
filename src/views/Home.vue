@@ -6,6 +6,9 @@
           <v-list-item-title class="title">
             {{ user.data.displayName }}
           </v-list-item-title>
+           <v-list-item-subtitle>
+           <b>{{rtClock}}</b>
+          </v-list-item-subtitle>
           <v-list-item-subtitle>
             {{ user.data.email }}
           </v-list-item-subtitle>
@@ -59,24 +62,31 @@
 
     <v-main>
       <v-tabs-items v-model="tab">
-        <v-tab-item v-for="item in items" :key="item"> </v-tab-item>
+        <v-tab-item class="note-tab"><note-card v-for="(note, index) in notes" :key="index" :noteData="note" class="note-card"/></v-tab-item>
       </v-tabs-items>
     </v-main>
   </v-app>
 </template>
 
 <script>
+
 import { mapGetters } from "vuex";
 import firebase from "firebase";
+import NoteCard from '../components/Note/NoteCard.vue';
+import moment from 'moment';
+
 export default {
   data: () => ({
     drawer: false,
     tab: null,
     items: ["web", "shopping", "videos", "images", "news"],
+    rtClock: moment().format('LTS')
   }),
+  components: {NoteCard,},
   computed: {
     ...mapGetters({
       user: "user",
+      notes: "notes"
     }),
   },
   methods: {
@@ -89,5 +99,24 @@ export default {
         });
     },
   },
+  mounted: function() {
+		setInterval(()=>{
+			this.rtClock = moment().format('LTS')
+		},1000)
+	}
 };
 </script>
+<style scoped>
+
+.note-tab{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 10px;
+}
+.note-card{
+  margin-bottom: 10px;
+}
+</style>
