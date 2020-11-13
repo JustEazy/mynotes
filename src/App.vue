@@ -8,7 +8,7 @@
 import * as database from './store/db'
 export default {
   mounted(){
-    database.getAllNotes()
+    database.initializeDataBase();
   }
 };
 </script>

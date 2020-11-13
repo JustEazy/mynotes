@@ -25,8 +25,16 @@
         color="#F5F5F5"
         @click:append="showicon = !showicon"
       ></v-text-field>
-      <v-btn depressed type="submit">
+      <v-btn
+        depressed
+        type="submit"
+        :loading="loading"
+        @click="simulateProgress"
+      >
         <span>Регистрация</span>
+        <template v-slot:loading>
+          <q-spinner-gears />
+        </template>
       </v-btn>
       <router-link
         to="login"
@@ -59,6 +67,7 @@ export default {
         (value) => (value || "").length > 6 || "Минимум 6 символов",
         (value) => !!value || "Обязательно для заполнения",
       ],
+      loading: false,
     };
   },
   methods: {
@@ -91,6 +100,12 @@ export default {
           this.error = err.message;
         });
     },
+    simulateProgress() {
+      this.loading = true;
+      setTimeout(() => {
+        this.loading = false;
+      }, 3000);
+    },
   },
 };
 </script>
@@ -108,5 +123,10 @@ export default {
 }
 .v-btn span {
   margin-right: 5px;
+}
+@media (max-width: 1025px) {
+  .v-text-field {
+    font-size: 13pt;
+  }
 }
 </style>

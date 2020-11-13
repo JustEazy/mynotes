@@ -1,14 +1,19 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import createPersistedState from "vuex-persistedstate";
 Vue.use(Vuex)
 
 export default new Vuex.Store({
+  plugins: [createPersistedState()],
   state: {
     user: {
       loggedIn: false,
       data: null
     },
     notes: null,
+    inportantNotes: null,
+    laterNotes: null,
+    urgentNotes: null,
   },
   mutations: {
     SET_LOGGED_IN(state, value) {
@@ -17,9 +22,18 @@ export default new Vuex.Store({
     SET_USER(state, data) {
       state.user.data = data;
     },
-    SET_ALL_NOTES(state, data){
+    SET_ALL_NOTES(state, data) {
       state.notes = data
-    }
+    },
+    SET_IMPORTANT_NOTES(state, data) {
+      state.importantNotes = data
+    },
+    SET_LATER_NOTES(state, data) {
+      state.laterNotes = data
+    },
+    SET_URGENT_NOTES(state, data) {
+      state.urgentNotes = data
+    },
   },
   actions: {
     fetchUser({ commit }, user) {
@@ -33,16 +47,35 @@ export default new Vuex.Store({
         commit("SET_USER", null);
       }
     },
-   async getAllNotes({ commit }, data){
-       commit('SET_ALL_NOTES', await data)
-    }
+    async getAllNotes({ commit }, data) {
+      commit('SET_ALL_NOTES', await data)
+    },
+    async getImportantNotes({ commit }, data) {
+      commit('SET_IMPORTANT_NOTES', await data)
+    },
+    async getLaterNotes({ commit }, data) {
+      commit('SET_LATER_NOTES', await data)
+    },
+    async getUrgentNotes({ commit }, data) {
+      commit('SET_URGENT_NOTES', await data)
+    },
   },
   getters: {
     user(state) {
       return state.user
     },
-    notes(state){
+    notes(state) {
       return state.notes
-    }
+    },
+    importantNotes(state){
+      return state.inportantNotes
+    },
+    laterNotes(state){
+      return state.laterNotes
+    },
+    urgentNotes(state){
+      return state.urgentNotes
+    },
+
   },
 })

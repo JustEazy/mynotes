@@ -7,7 +7,11 @@ import '@babel/polyfill'
 import "firebase/auth";
 import "firebase/firestore";
 import firebase from "firebase/app";
+import VueModal from '@kouts/vue-modal';
+import '@kouts/vue-modal/dist/vue-modal.css';
+import './quasar'
 
+Vue.component('Modal', VueModal);
 
 
 Vue.config.productionTip = false

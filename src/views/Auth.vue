@@ -1,11 +1,11 @@
 <template>
-  <div class="auth" >
+  <div class="auth">
     <transition name="fade">
-    <div class="form-container" v-if="show">
-        <router-view name="auth"  />
-    </div>
+      <div class="form-container" v-if="show">
+        <router-view name="auth" />
+      </div>
     </transition>
-  </div> 
+  </div>
 </template>
 
 <script>
@@ -41,5 +41,10 @@ export default {
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */ {
   opacity: 0;
+}
+@media (max-width: 1025px) {
+  .form-container {
+    width: 70%;
+  }
 }
 </style>
