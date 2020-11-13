@@ -23,7 +23,7 @@ export default new Vuex.Store({
   },
   actions: {
     fetchUser({ commit }, user) {
-      commit("SET_LOGGED_IN", user !== null);
+      commit("SET_LOGGED_IN", user);
       if (user) {
         commit("SET_USER", {
           displayName: user.displayName,
