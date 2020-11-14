@@ -36,7 +36,7 @@
         </v-list-item> </v-list
       ><Modal v-model="showModal" title="Добавить запись">
         <v-form @submit.prevent="addNewNote">
-          <v-text-field required
+          <v-text-field
             label="Заголовок"
             name="title"
             v-model="addNewNoteData.title"
@@ -122,6 +122,7 @@ import firebase from "firebase";
 import NoteCard from "../components/Note/NoteCard.vue";
 import moment from "moment";
 import * as database from "../store/db";
+import store from "../store"
 
 export default {
   data: () => ({
@@ -162,6 +163,7 @@ export default {
         .catch((err) => {
           console.error("Error");
         });
+        this.showModal = false;
     },
   },
   mounted: function () {
@@ -169,6 +171,7 @@ export default {
       this.rtClock = moment().format("LTS");
     }, 1000);
   },
+   
 };
 </script>
 <style>

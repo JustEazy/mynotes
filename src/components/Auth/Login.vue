@@ -32,6 +32,7 @@
         >Я не зарегистрирован. Перейти на страницу регистрации</router-link
       >
     </v-form>
+    {{error}}
   </div>
 </template>
 <script>
@@ -56,7 +57,7 @@ export default {
         .auth()
         .signInWithEmailAndPassword(this.email, this.password)
         .then((data) => {
-          this.$router.push({ name: "Home" });
+          this.$router.replace({ name: "Home" });
         })
         .catch((err) => {
           this.error = err.message;

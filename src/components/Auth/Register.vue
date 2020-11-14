@@ -93,7 +93,7 @@ export default {
                 });
             })
             .then(() => {
-              this.$router.push("/verify");
+              this.$router.replace("/verify");
             });
         })
         .catch((err) => {

@@ -13,7 +13,7 @@ const routes = [
     name: 'Home',
     component: Home,
     beforeEnter: (to, from, next) => {
-      if (to.name !== 'Login' && !store.state.user.loggedIn) next({name: 'Login'})
+      if (from.name !== 'Login' && !store.state.user.loggedIn) next({ name: 'Login' })
       else next()
     }
   },

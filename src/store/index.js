@@ -4,17 +4,17 @@ import createPersistedState from "vuex-persistedstate";
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  plugins: [createPersistedState()],
   state: {
     user: {
       loggedIn: false,
       data: null
     },
     notes: null,
-    inportantNotes: null,
+    importantNotes: null,
     laterNotes: null,
     urgentNotes: null,
   },
+  plugins: [createPersistedState()],
   mutations: {
     SET_LOGGED_IN(state, value) {
       state.user.loggedIn = value;
@@ -37,7 +37,7 @@ export default new Vuex.Store({
   },
   actions: {
     fetchUser({ commit }, user) {
-      commit("SET_LOGGED_IN", user);
+      commit("SET_LOGGED_IN", user !== null);
       if (user) {
         commit("SET_USER", {
           displayName: user.displayName,
@@ -68,7 +68,7 @@ export default new Vuex.Store({
       return state.notes
     },
     importantNotes(state){
-      return state.inportantNotes
+      return state.importantNotes
     },
     laterNotes(state){
       return state.laterNotes
