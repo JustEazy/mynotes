@@ -112,6 +112,7 @@
             class="note-card"
         /></v-tab-item>
       </v-tabs-items>
+      <calendar/>
     </v-main>
   </v-app>
 </template>
@@ -123,8 +124,13 @@ import NoteCard from "../components/Note/NoteCard.vue";
 import moment from "moment";
 import * as database from "../store/db";
 import store from "../store"
+import Calendar from "../components/Calendar/Calendar.vue"
+
 
 export default {
+  components:{
+    Calendar
+  },
   data: () => ({
     drawer: false,
     tab: null,
@@ -138,7 +144,8 @@ export default {
       category: ""
     },
   }),
-  components: { NoteCard },
+  components: { NoteCard,
+    Calendar },
   computed: {
     ...mapGetters({
       user: "user",

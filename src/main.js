@@ -13,7 +13,6 @@ import './quasar'
 
 Vue.component('Modal', VueModal);
 
-
 Vue.config.productionTip = false
 
 const firebaseConfig = {
